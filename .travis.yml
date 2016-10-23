@@ -23,7 +23,7 @@ deploy:
   - provider: firebase
     edge: true
     skip_cleanup: true
-    project: gdg-es-develop
+    project: gdg-madrid-develop
     token: $FIREBASE_TOKEN
     on:
       branch: develop
