@@ -1,0 +1,22 @@
+{
+  "name": "gdg-madrid",
+  "version": "1.0.0",
+  "description": "GDG Madrid WebSite",
+  "main": "service-worker.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gdgmadrid/gdg-madrid.git"
+  },
+  "author": "Alberto Gutierrez Juanes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gdgmadrid/gdg-madrid/issues"
+  },
+  "homepage": "https://github.com/gdgmadrid/gdg-madrid#readme"
+}
