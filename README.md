@@ -1,4 +1,4 @@
-# [gdgmadrid.com](https://gdgmadrid.com) [![Build status](https://travis-ci.org/GDGSpain/gdg.es.svg?branch=develop)](https://travis-ci.org/GDGSpain/gdg.es)
+# [gdgmadrid.com](https://gdgmadrid.com) [![Build status](https://travis-ci.org/GDGSpain/gdg.es.svg?branch=master)](https://travis-ci.org/GDGSpain/gdg.es)
 
 The GDG Spain official website
 
