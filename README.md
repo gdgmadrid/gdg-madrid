@@ -1,8 +1,8 @@
-# [gdgmadrid.com](https://gdgmadrid.com) [![Build status](https://travis-ci.org/gdgmadrid/website.svg?branch=master)](https://travis-ci.org/gdgmadrid/website)
+# [gdgmadrid.com](https://gdgmadrid.com) [![Build status](https://travis-ci.org/gdgmadrid/gdg-madrid.svg?branch=master)](https://travis-ci.org/gdgmadrid/gdg-madrid)
 
 The GDG Madrid official website
 
-[![Build history for master branch](https://buildstats.info/travisci/chart/gdgmadrid/website?branch=master&buildCount=50)](https://travis-ci.org/gdgmadrid/website/branches)
+[![Build history for master branch](https://buildstats.info/travisci/chart/gdgmadrid/gdg-madrid?branch=master&buildCount=50)](https://travis-ci.org/gdgmadrid/gdg-madrid/branches)
 ### Migrating from Polymer Starter Kit v1?
 
 [Check out our blog post that covers what's changed in PSK2 and how to migrate!](https://www.polymer-project.org/1.0/blog/2016-08-18-polymer-starter-kit-or-polymer-cli.html)
