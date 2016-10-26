@@ -23,14 +23,14 @@ deploy:
   - provider: firebase
     edge: true
     skip_cleanup: true
-    project: gdg-madrid-develop
+    project: gdgmadrid-devsite
     token: $FIREBASE_TOKEN
     on:
       branch: develop
   - provider: firebase
     edge: true
     skip_cleanup: true
-    project: gdg-madrid
+    project: gdgmadrid-site
     token: $FIREBASE_TOKEN
     on:
       branch: master
