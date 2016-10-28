@@ -1,0 +1,281 @@
+<!--
+@license
+Copyright (c) 2016 The GDG Madrid Authors. All rights reserved.
+This code may only be used under the MIT style license found at http://gdg.es/LICENSE.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="app-icons.html">
+<link rel="import" href="app-shared-styles.html">
+
+<dom-module id="app-shell">
+  <template>
+    <style include="app-shared-styles">
+      :host {
+        display: block;
+      }
+
+      /* IE 10 support for HTML5 hidden attr */
+      [hidden] {
+        display: none !important;
+      }
+
+      app-header {
+        background-color: #f4f4f4;
+      }
+
+      .menu-button {
+        /* Move the paper-icon-button to avoid the 8px padding for alignment */
+        margin-left: -8px;
+      }
+
+      .logo-container {
+        @apply(--layout-horizontal);
+        @apply(--layout-flex);
+        @apply(--layout-center);
+
+        height: 100%;
+      }
+
+      .logo-container a {
+        display: inline-block;
+
+        width: 173px;
+        height: 35px;
+      }
+
+      .logo-container a iron-image {
+        width: 100%;
+        height: 100%;
+      }
+
+      .main-menu {
+        --paper-tabs-selection-bar-color: var(--gdg-color-blue);
+
+        width: 425px;
+        height: 100%;
+      }
+
+      .main-menu paper-tab {
+        --paper-tab-ink: var(--gdg-color-blue);
+
+        color: var(--gdg-color-blue);
+      }
+
+      .main-menu paper-tab a {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+
+        text-decoration: none;
+        text-transform: uppercase;
+
+        color: inherit;
+      }
+
+      app-drawer {
+        z-index: 1;
+      }
+
+      .drawer-toolbar {
+        height: 192px;
+
+        background-color: var(--gdg-color-blue);
+      }
+
+      .drawer-menu {
+        display: block;
+      }
+
+      .drawer-menu a {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        @apply(--paper-font-subhead);
+
+        min-height: 48px;
+        padding: 0px 16px;
+
+        text-decoration: none;
+
+        color: #333333;
+        outline: none;
+      }
+
+      .drawer-menu a.iron-selected {
+        background-color: #d3d5d7;
+      }
+
+      .app-drawer-scrollable {
+        overflow: auto;
+
+        height: 100%;
+      }
+
+      @media all and (max-width: 625px) {
+        .logo-container {
+          @apply(--layout-center-justified);
+
+          /* Add the size of the .menu-button for alignment */
+          margin-right: 40px;
+        }
+      }
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:pageName"
+        data="{{routeData}}"></app-route>
+
+    <iron-media-query
+        query="max-width: 675px"
+        query-matches="{{smallScreen}}"></iron-media-query>
+
+    <firebase-app
+        auth-domain="gdg-es.firebaseapp.com"
+        database-url="https://gdg-es.firebaseio.com"
+        api-key="AIzaSyAIF5ALCsCSwKZhPqIIfwSOQPRrswB1Ovc"></firebase-app>
+
+    <app-header-layout>
+      <app-header condenses reveals effects="waterfall" role="navigation">
+        <app-toolbar>
+          <paper-icon-button
+              icon="menu"
+              class="menu-button"
+              on-tap="_toggleDrawer"
+              hidden$="[[!smallScreen]]"
+              aria-label="Sections"></paper-icon-button>
+
+          <div class="logo-container">
+            <a href="/" aria-label="GDG Madrid home">
+              <iron-image src="../images/gdgspain-logo.png" preload sizing="cover"></iron-image>
+            </a>
+          </div>
+
+          <template is="dom-if" if="[[!smallScreen]]">
+            <paper-tabs
+                selected="[[selectedPage]]"
+                attr-for-selected="name"
+                class="main-menu">
+              <paper-tab name="home" link tabindex="-1">
+                <a href="/">Inicio</a>
+              </paper-tab>
+              <paper-tab name="blog" link tabindex="-1">
+                <a href="http://devfest.gdgmadrid.com/" target="_blank">DevFest</a>
+              </paper-tab>
+              <paper-tab name="branding" link tabindex="-1">
+                <a href="/branding">Branding</a>
+              </paper-tab>
+            </paper-tabs>
+          </template>
+        </app-toolbar>
+      </app-header>
+
+      <neon-animated-pages
+          selected="[[selectedPage]]"
+          attr-for-selected="name"
+          selected-attribute="visible"
+          fallback-selection="404">
+        <page-home name="home"></page-home>
+        <page-branding name="branding"></page-branding>
+        <page-404 name="404"></page-404>
+      </neon-animated-pages>
+    </app-header-layout>
+
+    <template is="dom-if" if="[[smallScreen]]">
+      <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
+        <div class="app-drawer-scrollable">
+          <app-toolbar class="drawer-toolbar"></app-toolbar>
+          <iron-selector
+              selected="[[selectedPage]]"
+              attr-for-selected="name"
+              class="drawer-menu"
+              role="navigation">
+            <a name="home" href="/">Inicio</a>
+            <a name="blog" href="http://devfest.gdgmadrid.com/">DevFest</a>
+            <a name="branding" href="/branding">Branding</a>
+          </iron-selector>
+        </div>
+      </app-drawer>
+    </template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'app-shell',
+
+      properties: {
+        selectedPage: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_selectedPageChanged'
+        },
+
+        defaultSelectedPage: {
+          type: String,
+          value: 'home'
+        }
+      },
+
+      observers: [
+        '_routePageChanged(routeData.pageName)'
+      ],
+
+      listeners: {
+        'change-section': '_onChangeSection'
+      },
+
+      _routePageChanged: function(pageName) {
+        this.selectedPage = pageName || this.defaultSelectedPage;
+
+        // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
+        // with `behavior: 'silent'` to disable header scroll effects during the scroll.
+        Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
+
+        // Close the drawer - in case the route change came from a link in the drawer.
+        this.drawerOpened = false;
+      },
+
+      _pageDoesNotExist: function(page) {
+        return this.pagesNames.indexOf(page) === -1;
+      },
+
+      _selectedPageChanged: function(selectedPage) {
+        var filePath = 'pages/' + selectedPage + '/page-' + selectedPage + '.html';
+        var resolvedPageUrl = this.resolveUrl(filePath);
+
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+
+      _showPage404: function() {
+        this.selectedPage = '404';
+      },
+
+      _toggleDrawer: function() {
+        this.drawerOpened = !this.drawerOpened;
+      },
+
+      _onChangeSection: function(event) {
+        var title = event.detail.title;
+
+        if (title) {
+          document.title = title;
+        }
+      }
+    });
+  </script>
+</dom-module>

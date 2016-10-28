@@ -1,0 +1,42 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy --debug --project gdg-madrid
+[debug] CLI Version:  3.0.8
+[debug] Platform:     darwin
+[debug] Node Version: v5.10.1
+[debug] Time:         Wed Oct 26 2016 20:24:26 GMT+0200 (CEST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/gdg-madrid 
+[debug] <<< HTTP RESPONSE 404
+[debug] <<< HTTP RESPONSE BODY
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects 
+[debug] <<< HTTP RESPONSE 200
+[error] 
+[error] Error: Unable to authorize access to project gdg-madrid
+
+Note: This version of the Firebase CLI is only compatible with projects upgraded
+to the new Firebase Console. To access firebase.com apps, you will need to
+use a previous version: npm install -g firebase-tools@^2.1
+
+To access the Firebase Console, visit https://console.firebase.google.com/
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy --debug --project gdg-madrid-7de77
+[debug] CLI Version:  3.0.8
+[debug] Platform:     darwin
+[debug] Node Version: v5.10.1
+[debug] Time:         Wed Oct 26 2016 20:25:02 GMT+0200 (CEST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/gdg-madrid-7de77 
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/gdg-madrid-7de77/tokens 
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'gdg-madrid-7de77'...
+[info] 
+[info] i  deploying hosting
+[info] ✔  database: rules ready to deploy.
+[error] 
+[error] Error: Specified public directory does not exist, can't deploy hosting
