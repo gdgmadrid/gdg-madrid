@@ -2,15 +2,15 @@
   "name": "gdg.es",
   "description": "The GDG Spain official website",
   "version": "0.12.0",
-  "author": "Abdón Rodríguez Davila <a@abdonrd.com> (https://abdonrd.com)",
-  "homepage": "https://gdg.es",
+  "author": "Alberto Gutierrez",
+  "homepage": "https://gdgmadrid.com",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/GDGSpain/gdg.es.git"
+    "url": "git://github.com/gdgmadrid/gdg-madrid.git"
   },
   "bugs": {
-    "url": "https://github.com/GDGSpain/gdg.es/issues"
+    "url": "https://github.com/gdgmadrid/gdg-madrid/issues"
   },
   "devDependencies": {
     "del": "^2.2.0",
@@ -27,5 +27,6 @@
   "scripts": {
     "build": "gulp build",
     "lint": "gulp lint"
-  }
+  },
+  "homepage": "https://github.com/gdgmadrid/gdg-madrid#readme"
 }

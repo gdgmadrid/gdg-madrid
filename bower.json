@@ -1,15 +1,15 @@
 {
-  "name": "gdg.es",
-  "description": "The GDG Spain official website",
+  "name": "gdgmadrid.com",
+  "description": "The GDG Madrid official website",
   "authors": [
-    "Abdón Rodríguez Davila <a@abdonrd.com> (https://abdonrd.com)"
+    "Alberto Gutierrez Juanes <aljesusg@gmail.com> "
   ],
-  "homepage": "https://gdg.es",
-  "license": "https://gdg.es/LICENSE.txt",
+  "homepage": "https://gdgmadrid.com",
+  "license": "https://gdgmadrid.com/LICENSE.txt",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/GDGSpain/gdg.es.git"
+    "url": "git://github.com/gdgmadrid/gdg-madrid.git"
   },
   "dependencies": {
     "app-layout": "PolymerElements/app-layout#^0.10.0",
