@@ -1,0 +1,84 @@
+<!--
+@license
+Copyright (c) 2016 The GDG Spain Authors. All rights reserved.
+This code may only be used under the MIT style license found at http://gdg.es/LICENSE.txt
+-->
+
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<link rel="import" href="../../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../app-shared-elements/gdgspain-animate-page.html">
+<link rel="import" href="../../app-shared-styles.html">
+<link rel="import" href="page-events-list.html">
+
+<dom-module id="page-events">
+  <template>
+    <style include="app-shared-styles">
+      :host {
+        @apply(--page-content);
+
+        display: block;
+      }
+
+      .events-list {
+        padding: 0;
+
+        list-style: none;
+      }
+
+      .events-list li {
+        width: 100%;
+        margin-bottom: 20px;
+
+        will-change: transform;
+      }
+    </style>
+
+    <firebase-query
+        path="/events"
+        data="{{events}}">
+    </firebase-query>
+
+    <app-indexeddb-mirror
+        key="events"
+        data="{{events}}"
+        persisted-data="{{persistedEvents}}">
+    </app-indexeddb-mirror>
+
+    <h1>Eventos</h1>
+
+    <div class="description">
+      <p>Estos son los próximos eventos que organizamos en España. ¿Te lo vas a perder?</p>
+      <p>Estamos en constante búsqueda de nuevas conferencias, talleres con tecnologías emergentes… ¿quieres ayudarnos? Mándanos un correo electrónico con tu propuesta y la valoraremos para incluirte en futuros eventos.</p>
+    </div>
+
+    <div id="transformedContent">
+      <page-events-list events="[[persistedEvents]]"></page-events-list>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'page-events',
+
+      properties: {
+        visible: {
+          type: Boolean,
+          observer: '_visibleChanged'
+        }
+      },
+
+      behaviors: [
+        Polymer.GDGSpainAnimatePage
+      ],
+
+      _visibleChanged: function(visible) {
+        if (visible) {
+          this.fire('change-section', {
+            title: 'Eventos - GDG Spain'
+          });
+        }
+      }
+    });
+  </script>
+</dom-module>

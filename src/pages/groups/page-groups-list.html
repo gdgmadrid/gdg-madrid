@@ -1,0 +1,120 @@
+<!--
+@license
+Copyright (c) 2016 The GDG Spain Authors. All rights reserved.
+This code may only be used under the MIT style license found at http://gdg.es/LICENSE.txt
+-->
+
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/app-layout/app-grid/app-grid-style.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../app-shared-elements/gdgspain-cascaded-animation.html">
+<link rel="import" href="group-item.html">
+
+<dom-module id="page-groups-list">
+  <template>
+    <style include="app-grid-style">
+      :host {
+        --app-grid-columns: 1;
+        --app-grid-gutter: var(--margin-size);
+
+        display: block;
+      }
+
+      .groups-list {
+        margin-right: -var(--app-grid-gutter);
+        margin-bottom: -var(--app-grid-gutter);
+        padding: 0;
+
+        list-style: none;
+      }
+
+      .groups-list li {
+        will-change: transform;
+      }
+
+      .groups-list a {
+        display:block;
+
+        text-decoration: none;
+      }
+
+      @media (min-width: 500px) {
+        :host {
+          --app-grid-columns: 2;
+        }
+      }
+
+      @media (min-width: 750px) {
+        :host {
+          --app-grid-columns: 3;
+        }
+      }
+    </style>
+
+    <ul id="list" class="groups-list app-grid">
+      <template
+          id="groups"
+          is="dom-repeat"
+          items="[[groups]]"
+          as="group"
+          on-dom-change="_domChanged"
+          filter="{{_computeFilter(filterGroups)}}">
+        <li>
+          <group-item group="[[group]]"></group-item>
+        </li>
+      </template>
+    </ul>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'page-groups-list',
+
+      properties: {
+        groups: {
+          type: Array
+        },
+
+        filterGroups: {
+          type: String
+        }
+      },
+
+      behaviors: [
+        Polymer.GDGSpainCascadedAnimation
+      ],
+
+      _domChanged: function() {
+        if (this.groups.length > 0) {
+          var nodes = Polymer.dom(this.$.list).querySelectorAll('li');
+          this.animationConfig['entry'][1].nodes = nodes;
+          this.playAnimation('entry');
+        }
+      },
+
+      _computeFilter: function(searchText) {
+        if (!searchText) {
+          return null;
+        } else {
+          return function(group) {
+            var groupName = group.name.toLowerCase();
+
+            return groupName.indexOf(searchText.toLowerCase()) !== -1;
+          };
+        }
+      },
+
+      attached: function() {
+        this._updateGridStyles = this._updateGridStyles || function() {
+          this.updateStyles();
+        }.bind(this);
+
+        window.addEventListener('resize', this._updateGridStyles);
+      },
+
+      detached: function() {
+        window.removeEventListener('resize', this._updateGridStyles);
+      }
+    });
+  </script>
+</dom-module>
